@@ -11,12 +11,15 @@ const PORT = 3001;
 const app = express();
 app.use(express.json())
 
-
+// app.use(cors({
+//   origin:'http://127.0.0.1:5501/index.html'
+// }))
 
 const allowedOrigins = [
-  // 'http://127.0.0.1:5501/index.html',
+  'http://127.0.0.1:5501/index.html',
   'http://127.0.0.1:3000/index.html'
 ]
+
 app.use(cors({
   origin: (origin, callback) => {
     if(!origin || allowedOrigins.includes(origin)) callback(null, true) //*✅Permite acceso

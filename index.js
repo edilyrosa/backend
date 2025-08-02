@@ -10,7 +10,27 @@ import cors from "cors";
 const PORT = 3001;
 const app = express();
 app.use(express.json())
-app.use(cors())
+
+
+
+const allowedOrigins = [
+  // 'http://127.0.0.1:5501/index.html',
+  'http://127.0.0.1:3000/index.html'
+]
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin || allowedOrigins.includes(origin)) callback(null, true) //*✅Permite acceso
+    else callback(new Error('origin no permitido por CORS'), false) //!🚫Denegado acceso
+  }
+
+}))
+
+
+
+
+
+
+
 
 app.get('/', (req, res)=>{
     //? Envía un mensaje de texto simple
